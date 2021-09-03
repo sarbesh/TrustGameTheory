@@ -1,0 +1,25 @@
+---
+logging:
+  level:
+    ROOT: WARN
+    com.hackerearth.aap: INFO
+
+spring:
+  application:
+    name: "Trust Game Service"
+  mvc:
+    format:
+      date-time: iso
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info, metrics
+
+scores:
+  dd: 2
+  ee: 0
+  de:
+    E: 3
+    D: -1

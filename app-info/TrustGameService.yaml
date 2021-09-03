@@ -1,0 +1,106 @@
+swagger: "2.0"
+info:
+  title: Trust GameService
+  description: Service to demonstrate trust game theory for aap software developer challenge
+  version: 1.0.0
+host: localhost:8080
+schemes:
+  - http
+basePath: /api/v1
+paths:
+  /auto:
+    post:
+      summary: Intelligent endpoint that tris to win.
+      description: Thie endpoint tried to win.
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: request
+          schema:
+            $ref: '#/definitions/moveRequest'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/MoveResponse'
+  /eagle:
+    post:
+      summary: Eagle endpoint that always cheats.
+      description: Thie endpoint Cheats everytime.
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: request
+          schema:
+            $ref: '#/definitions/moveRequest'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/MoveResponse'
+  /dove:
+    post:
+      summary: Dove endpoint that tris to cooperate.
+      description: Thie endpoint tried to cooperate.
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: request
+          schema:
+            $ref: '#/definitions/iterationRequest'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/DefaultResponse'
+definitions:
+  moveRequest:
+    type: object
+    properties:
+      Move:
+        type: string
+        enum:
+          - D
+          - E
+        description: Move that will made by user D -> cooperate, E -> cheat.
+        example: D
+  iterationRequest:
+    type: object
+    properties:
+      Iterations:
+        type: integer
+        description: Number of moves the game will be played for.
+        example: 11
+  MoveResponse:
+    type: object
+    properties:
+      Iteration:
+        type: integer
+        description: Current move iteration, 0 for default
+        example: 11
+      "API score":
+        type: integer
+        description: Score scored by service
+        example: 27
+      "User score":
+         type: integer
+         description: Score scored by User
+         example: 17
+  DefaultResponse:
+    type: object
+    properties:
+      Iteration:
+        type: integer
+        description: Current move iteration, 0 for default
+        example: 0
+      "API score":
+        type: integer
+        description: Score scored by service
+        example: 0
+      "User score":
+        type: integer
+        description: Score scored by User
+        example: 0
